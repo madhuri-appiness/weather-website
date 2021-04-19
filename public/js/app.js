@@ -8,7 +8,7 @@ e.preventDefault();
 const location = input.value;
 id.textContent = 'Loading...'
 
-fetch(`http://localhost:5000/weather?address=${location}`).then((response)=>{
+fetch(`/weather?address=${location}`).then((response)=>{
     response.json().then((data)=>{
         if(data.err){
             id.textContent = data.err

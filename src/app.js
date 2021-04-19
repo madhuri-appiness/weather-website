@@ -6,8 +6,9 @@ const app = express();
 
 //define paths for express config
 const publicDir = path.join(__dirname,'../public');
-const tempDir =path.join(__dirname,'../templates')
+const tempDir =path.join(__dirname,'../templates');
 
+const port = process.env.PORT || 5000; 
 
 // setup static directory to serve
 app.set('view engine','hbs');
@@ -58,6 +59,6 @@ app.get('/weather',(req,res)=>{
     }
 })
 
-app.listen('5000',()=>{
+app.listen(port,()=>{
     console.log('server is on port 5000')
 })
