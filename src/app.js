@@ -10,11 +10,17 @@ const tempDir =path.join(__dirname,'../templates');
 
 const port = process.env.PORT || 5000; 
 
-// setup static directory to serve
+//set up view engine in handlebars where views is default
 app.set('view engine','hbs');
+
+//set up custom views in hbs where views is renamed
 app.set('views',tempDir)
+
+// setup static directory to serve
 app.use(express.static(publicDir))
 
+
+//get handlebar index template 
 app.get('',(req,res)=>{
     res.render('index',{
         title:'Weather App',
@@ -33,7 +39,7 @@ app.get('/weather',(req,res)=>{
        return res.send('You Must send address')
     }
     else{
-        geoCode(req.query.address, (err, {lat,long}={}) => {
+        geoCode(req.query.address, (err, {lat,long,location}={}) => {
             if (err) {
                 return res.send({err})
             } else {
@@ -43,7 +49,8 @@ app.get('/weather',(req,res)=>{
                     } else {
                        return res.send({
                            forecast:result,
-                           address:req.query.address
+                           address:req.query.address,
+                           location:location
                         })
     
                     }
